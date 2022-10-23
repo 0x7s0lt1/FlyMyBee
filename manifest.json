@@ -1,11 +1,11 @@
 {
     "manifest_version": 3,
-    "name": "MyBee",
-    "description": "MyBee",
+    "name": "FlyMyBee",
+    "description": "FlyMyBee",
     "version": "1.0",
-    "permissions": ["scripting"],
+    "permissions": ["tabs"],
     "action": {
-      "default_icon": "/src/images/icon-active.png"
+      "default_icon": "/src/images/icon-disabled.png"
     },
     "background": {
         "service_worker": "background.js"
@@ -14,12 +14,12 @@
         {
           "js": ["/src/js/content.js"],
           "matches": [
-            "https://*/*"
+            "*://*/*"
           ]
         }
       ],
       "web_accessible_resources": [{
         "resources": ["src/images/buzzbee.gif"],
-        "matches": ["https://*/*"]
+        "matches": ["*://*/*"]
       }]
   }

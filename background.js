@@ -1,19 +1,26 @@
 
-let isEnabled = true;
-let icon = {
-  enabled : './src/images/icon-active.png',
-  diabled : './src/images/icon-inactive.png',
-};
+let isEnabled = false;
 
+let icon = {
+  enabled : './src/images/icon-enabled.png',
+  disabled : './src/images/icon-disabled.png',
+};
 
 chrome.action.onClicked.addListener(async (tab) => {
 
   
-  chrome.tabs.sendMessage(tab.id,{ action : isEnabled ? "disable" : "enable" }, (response) => {
-    return;
-  });
+  chrome.tabs.query({},(tabs) =>{
 
-  chrome.action.setIcon({path: isEnabled ? icon.diabled : icon.enabled });
+    tabs.forEach(t => {
+
+      chrome.tabs.sendMessage(t.id,{ action : isEnabled ? "disable" : "enable" });
+
+    });
+
+  })
+
+  
+  chrome.action.setIcon({path: isEnabled ? icon.disabled : icon.enabled });
 
   isEnabled = isEnabled ? false : true;
 
